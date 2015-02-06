@@ -1,0 +1,87 @@
+
+$pulse
+ numpulses=4
+ pulsetype=2, 2, 2, 2
+ omega2=0.05695704704152884, 0.05695704704152884, 0.9187798603454612, 0.9187798603454612
+ omega=0.0034557519189487725, 0.0034557519189487725, 0.152053084433746, 0.152053084433746
+ intensity=0.0003, 0.0, 1e-06, 0.0
+ phaseshift=2.09916771311, 2.09916771311, 4.33148019289, 4.33148019289
+ pulsestart=0.0, 0.0, 448.347107438, 448.347107438
+ pulsetheta=0.0, 1.57079632679, 0.0, 1.57079632679
+ minpulsetime=2137.0684026044564
+/
+
+
+
+$parinp
+
+notiming=2
+
+
+loadavectorflag=1
+avectorfile="avector.bin.step_0"
+loadspfflag=1
+spffile="spfs.bin.step_0"
+
+avectoroutfile="avector.bin.step_1"
+spfoutfile="spfs.bin.step_1"
+
+
+
+tdflag=1
+
+par_timestep=0.05
+
+
+numactions=1
+actions=21
+autotimestep=2.15
+
+  
+
+
+
+numelec=2
+
+
+sparseconfigflag=1
+
+maxexpodim=300
+
+nspf = 5
+numfrozen=0
+
+spfrestrictflag=1
+spfugrestrict=0
+
+spfmvals=0,0,0,1,-1,0,0,1,-1,0,1,-1,2,-2
+spfugvals=  1, 1, 1,-1,-1,-1
+
+restrictflag=1
+restrictms=0   
+
+mrestrictflag=0
+mrestrictval=0
+
+
+
+/
+
+$heparinp
+
+NucCharge1=2.d0
+LBIG=2, MBIG=2
+
+henumpoints=10
+henumelements=8
+hecelement=6
+heecstheta=0.4d0
+heelementsizes=6.d0,6.d0,6.d0,6.d0,6.d0,6.d0,6.d0,6.d0,6.d0,6.d0
+
+/
+
+
+
+
+
+

@@ -1,0 +1,5 @@
+arrays looped over in this calculation (descending order of significance)
+dtarray	[-4.1322314  0.         4.1322314]
+xuvphasearray	[ 0.   0.4  0.8  1.2  1.6]
+IRphasearray	[ 0.          0.18181818  0.36363636  0.54545455  0.72727273  0.90909091
+  1.09090909  1.27272727  1.45454545  1.63636364  1.81818182]
