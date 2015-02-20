@@ -67,24 +67,41 @@ ftEarray=nDFFT(Earray,axislist=[-1], shiftaxes=True)
 #        if(mod(i-j,2)==0):
 
 evlo=20
-evhi=24
+evhi=30
 npr=1#number of probe photons
+
+ylimstr="_ylo_"+str(evlo)+"eV_yhi_"+str(evhi)+"eV"
 filenamebase="helium_nonhermitian_decomposition_npr_"+str(npr)+"Iir_3e11_Ixuv_1e10"
-for Ntot in range(0,1):#range(-6,7,2):
+taarraylist=[]
+filenamelist=[]
+legendlist=[]
+for Ntot in range(2,3):#range(-6,7,2):
     for i in range(-3,4):
         j=-(Ntot-i)
         nstr="_np_"+str(i)+"_nm_"+str(j)+"_ntot_"+str(Ntot)
         if(j in range(-3,4)):
             nlist=indxlist(ftveclist[1:-1],[npr,i,j])
             tmparray=ftzdiparray[:,nlist[0],nlist[1],nlist[2],:]
-            xvec=veclist[0]
-            yvec=ftveclist[-1]
-            xarray, yarray=vecstoarrays(xvec,yvec)
             taarray=transientabsorption(tmparray,ftEarray)
-            ylimstr="_ylo_21.5eV_yhi_23eV"
-            retfig=imshowplot(xarray,yarray,taarray, ymultfactor=Hrt,
-                              symmetricrange=True, gamma=5, ylo=evlo, yhi=evhi, legend=str(i)+", "+str(j)+", Ntot = "+str(i-j))
-            if(savefigs):
-                retfig.savefig(filenamebase+nstr+ylimstr+".png")
+            taarraylist.append(taarray)
+            legend=str(i)+", "+str(j)+", Ntot = "+str(i-j)
+            legendlist.append(legend)
+            filename=filenamebase+nstr+ylimstr+".png"
+            filenamelist.append(filename)
 
+#plot arrays after normalizing
+xvec=veclist[0]
+yvec=ftveclist[-1]
+xarray, yarray=vecstoarrays(xvec,yvec)
+maxval=array(list(map(lambda x: abs(x).max(), taarraylist))).max()
+for i in range(len(taarraylist)):
+    taarray=taarraylist[i]/maxval
+    legend=legendlist[i]
+    filename=filenamelist[i]
+    retfig=imshowplot(xarray,yarray,taarray, xmultfactor=aut/1000, ymultfactor=Hrt,
+                      symmetricrange=True, gamma=5, ylo=evlo, yhi=evhi,
+                      legend=legend)
+    if(savefigs):
+        retfig.savefig(filename)
+        print("saved figure "+filename)
 plt.show()
