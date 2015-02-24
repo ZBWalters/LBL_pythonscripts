@@ -2,6 +2,7 @@ from numpy import *
 import numpy as np
 from matplotlib.colors import LinearSegmentedColormap as LSC
 from scipy import *
+from scipy import interpolate
 import matplotlib
 import matplotlib.pyplot as plt
 from matplotlib import cm
@@ -17,6 +18,7 @@ from skimage.color import lab2rgb,luv2rgb
 from matplotlib._cm import cubehelix
 import mpl_toolkits.axisartist as AA
 from mpl_toolkits.axes_grid1 import host_subplot, make_axes_locatable
+
 
 import os
 import sys
@@ -1419,5 +1421,15 @@ def vecstoarrays(vec1,vec2):
     retarray1=outer(vec1,ones(m))
     retarray2=outer(ones(n),vec2)
     return retarray1,retarray2
+
+################################################################################
+def twoDinterparray(xin,yin,zin, xnew, ynew, xmultfactor=1, ymultfactor=1, kx=3, ky=3, s=0):
+    #interpolate function defined as f(xin, yin)=zin on array points defined by xnew, ynew
+    interpfun=interpolate.RectBivariateSpline(xin[:,0]*xmultfactor,
+                                              yin[0,:]*ymultfactor, zin, kx=kx,
+                                              ky=ky, s=s)
+    znew=interpfun.ev(xnew,ynew)
+    print("shape znew\t"+str(shape(znew)))
+    return znew
 
 
